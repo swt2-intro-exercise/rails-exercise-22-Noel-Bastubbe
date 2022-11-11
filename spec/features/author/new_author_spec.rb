@@ -12,4 +12,9 @@ require 'rails_helper'
      expect(page).to have_field('author[last_name]')
      expect(page).to have_field('author[homepage]')
    end
+
+   it "should not validate without last name" do
+     @author = Author.new(first_name: "Alan", last_name: "", homepage: "http://wikipedia.org/Alan_Turing")
+     expect(@author).to_not be_valid
+   end
  end
