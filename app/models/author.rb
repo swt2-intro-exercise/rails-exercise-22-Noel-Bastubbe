@@ -1,8 +1,8 @@
 class Author
-  def initialize(first_name, last_name, homepage)
-    @first_name = first_name
-    @last_name = last_name
-    @homepage = homepage
+  def initialize(params)
+    @first_name = params[0]
+    @last_name = params[1]
+    @homepage = params[2]
   end
 
   def first_name
