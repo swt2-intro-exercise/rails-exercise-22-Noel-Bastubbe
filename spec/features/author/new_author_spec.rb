@@ -17,4 +17,13 @@ require 'rails_helper'
      @author = Author.new(first_name: "Alan", last_name: "", homepage: "http://wikipedia.org/Alan_Turing")
      expect(@author).to_not be_valid
    end
+
+   it "should show validation errors" do
+     visit new_author_path
+     fill_in 'author[first_name]', with: 'Alan'
+     fill_in 'author[last_name]', with: ''
+     fill_in 'author[homepage]', with: 'http://wikipedia.org/Alan_Turing'
+     find('input[type="submit"]').click
+     expect(page).to have_text("error")
+   end
  end
