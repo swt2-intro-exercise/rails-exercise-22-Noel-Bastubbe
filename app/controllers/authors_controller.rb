@@ -1,27 +1,24 @@
 class AuthorsController < ApplicationController
+
   def index
     @authors = Author.all
   end
-
   def show
     @author = Author.find(params[:id])
   end
-
   def new
     @author = Author.new
   end
-
   def edit
     @author = Author.find(params[:id])
   end
-
   def create
     @author = Author.new(author_params)
 
     if @author.save
       redirect_to @author
     else
-      render 'new'
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -31,7 +28,7 @@ class AuthorsController < ApplicationController
     if @author.update(author_params)
       redirect_to @author
     else
-      render 'edit'
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -43,7 +40,7 @@ class AuthorsController < ApplicationController
   end
 
   private
-  def author_params
-    params.require(:author).permit(:first_name, :last_name, :homepage)
-  end
+    def author_params
+      params.require(:author).permit(:first_name, :last_name, :homepage)
+    end
 end
